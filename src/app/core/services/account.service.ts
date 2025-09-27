@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { ReplaySubject } from 'rxjs';
+import { Register } from '../models/register';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +41,14 @@ export class AccountService {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
   }
-  
+
+  register(model: Register) {
+    return this.http.post(this.baseUrl + 'auth/signup', model, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+  }
+
 }

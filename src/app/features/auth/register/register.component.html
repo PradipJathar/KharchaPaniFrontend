@@ -1,1 +1,61 @@
-<p style="margin-top: 4em;">register works!</p>
+<div class="register-container d-flex align-items-center justify-content-center">
+    <div class="card shadow p-4 p-md-5 register-card">
+        <h2 class="text-center mb-4">Create Account</h2>
+
+        <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter first name"
+                    [(ngModel)]="model.firstName" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter last name"
+                    [(ngModel)]="model.lastName" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter email"
+                    [(ngModel)]="model.email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+                    placeholder="Enter phone number" [(ngModel)]="model.phoneNumber" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="birthDate" class="form-label">Birth Date</label>
+                <input type="date" id="birthDate" name="birthDate" class="form-control" [(ngModel)]="model.birthDate"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select id="gender" name="gender" class="form-control" [(ngModel)]="model.gender" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="OTHER">Other</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password"
+                    [(ngModel)]="model.password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+
+            <p class="text-center mt-3 mb-0">
+                Already have an account? <a routerLink="/login">Login</a>
+            </p>
+
+        </form>
+    </div>
+</div>
