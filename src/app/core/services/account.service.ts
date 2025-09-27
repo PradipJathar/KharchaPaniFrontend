@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { User } from '../_models/user';
+import { User } from '../models/user';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { ReplaySubject } from 'rxjs';
 })
 export class AccountService {
 
-  baseUrl = 'https://localhost:7172/api/';
+  baseUrl = 'http://192.168.1.23:8091/api/';
 
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -17,7 +17,10 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'account/login', model).pipe(
+    return this.http.post(this.baseUrl + 'auth/login', model, {  headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }}).pipe(
       map((response: User) => {
         const user = response;
         if (user) {

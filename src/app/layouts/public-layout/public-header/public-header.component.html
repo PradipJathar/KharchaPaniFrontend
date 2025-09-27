@@ -1,21 +1,29 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
 
-        <a class="navbar-brand" href="#">Kharcha Pani</a>
+        <a class="navbar-brand" routerLink="/" routerLinkActive="active">Kharcha Pani</a>
 
-        <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ | async">
-            <li class="nav-item"> 
-                <a class="nav-link" href="#">My Expenses</a> 
+        <!-- <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ | async"> -->
+        <ul class="navbar-nav ml-auto">
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" routerLink="/" routerLinkActive="active">Features</a>
             </li>
-            <li class="nav-item"> 
-                <a class="nav-link" href="#">Reports</a> 
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/" routerLinkActive="active">Guide</a>
+            </li> -->
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">Log In</a>
             </li>
-            <li class="nav-item"> 
-                <a class="nav-link" href="#">Manage</a> 
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign Up</a>
             </li>
         </ul>
 
-        <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
+        <!-- <div class="dropdown" *ngIf="accountService.currentUser$ | async" dropdown>
             <a class="dropdown-toggle text-light" dropdownToggle>Welcome User</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
                 <a class="dropdown-item">Edit Profile</a>
@@ -25,9 +33,9 @@
         </div>
 
         <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()"
-            autocomplete="off"> 
+            autocomplete="off">
 
-            <input name="username" [(ngModel)]="model.username"
+            <input name="username" [(ngModel)]="model.userName"
                 class="form-control mr-sm-2" type="text" placeholder="Username">
 
             <input name="password" [(ngModel)]="model.password"
@@ -35,7 +43,7 @@
 
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
 
-        </form>
+        </form> -->
 
     </div>
 </nav>
