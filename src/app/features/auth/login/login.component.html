@@ -2,21 +2,35 @@
   <div class="card shadow p-4 p-md-5 login-card">
     <h2 class="text-center mb-4">Welcome Back</h2>
 
-    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && login()" autocomplete="off">
       
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Enter username"
-          [(ngModel)]="model.userName" required>
+        <app-text-input [formControl]='loginForm.controls["userName"]' 
+                        [label]='"Username"'>
+        </app-text-input>
+        <!-- <input type="text" id="username" name="username" class="form-control" placeholder="Enter username"
+          [(ngModel)]="model.userName" required> -->
       </div>
       
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" name="password" class="form-control" placeholder="Enter password"
-          [(ngModel)]="model.password" required>
+        <app-text-input [formControl]='loginForm.controls["password"]' 
+                        [label]='"Password"' [type]='"password"'>
+        </app-text-input>
+        <!-- <input type="password" id="password" name="password" class="form-control" placeholder="Enter password"
+          [(ngModel)]="model.password" required> -->
+      </div>
+
+      <div class="row" *ngIf="validationErrors.length > 0">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+                {{error}}
+            </li>
+        </ul>
       </div>
       
-      <div class="d-flex justify-content-between align-items-center mb-3">
+      <!-- <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="rememberMe">
           <label class="form-check-label" for="rememberMe">
@@ -24,14 +38,14 @@
           </label>
         </div>
         <a href="#" class="text-decoration-none">Forgot password?</a>
-      </div>
+      </div> -->
       
-      <button type="submit" class="btn btn-primary w-100">Login</button>
+      <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary w-100">Login</button>
       
       <p class="text-center mt-3 mb-0">
         Don’t have an account? <a routerLink="/register">Sign Up</a>
       </p>
       
-      </form>
-      </div>
-      </div>
+    </form>
+  </div>
+</div>

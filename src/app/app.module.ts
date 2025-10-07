@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module'; // <-- use your AppRoutingModule
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TextInputComponent } from './shared/forms/text-input/text-input.component';
+import { DateInputComponent } from './shared/forms/date-input/date-input.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +27,17 @@ import { ToastrModule } from 'ngx-toastr';
     PublicFooterComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TextInputComponent,
+    DateInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,           
-    BrowserAnimationsModule,
     HttpClientModule, 
     FormsModule,
-    BsDropdownModule.forRoot(),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
       timeOut: 3000,                        
@@ -41,7 +46,8 @@ import { ToastrModule } from 'ngx-toastr';
       easing: 'ease-in',                    
       easeTime: 300,                        
       toastClass: 'ngx-toastr animated fadeInDown'
-    })
+    }),
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

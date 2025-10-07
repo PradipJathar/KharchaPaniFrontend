@@ -1,61 +1,108 @@
 <div class="register-container d-flex align-items-center justify-content-center">
-    <div class="card shadow p-4 p-md-5 register-card">
-        <h2 class="text-center mb-4">Create Account</h2>
+  <div class="card shadow p-4 p-md-5 register-card">
+    <h2 class="text-center mb-4">Create Account</h2>
 
-        <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
+      
+      <!-- First & Last Name -->
+      <div class="row">
+        <div class="col-md-6 col-12 mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <app-text-input [formControl]='registerForm.controls["firstName"]' 
+                          [label]='"First Name"'>
+          </app-text-input>
+          <!-- <input type="text" id="firstName" name="firstName" class="form-control"
+            placeholder="Enter first name" [(ngModel)]="model.firstName" required> -->
+        </div>
+        <div class="col-md-6 col-12 mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <app-text-input [formControl]='registerForm.controls["lastName"]' 
+                          [label]='"Last Name"'>
+          </app-text-input>
+          <!-- <input type="text" id="lastName" name="lastName" class="form-control"
+            placeholder="Enter last name" [(ngModel)]="model.lastName" required> -->
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter first name"
-                    [(ngModel)]="model.firstName" required>
-            </div>
+      <!-- Email & Phone -->
+      <div class="row">
+        <div class="col-md-6 col-12 mb-3">
+          <label for="email" class="form-label">Email</label>
+          <app-text-input [formControl]='registerForm.controls["email"]' 
+                          [label]='"Email"'>
+          </app-text-input>
+          <!-- <input type="email" id="email" name="email" class="form-control"
+            placeholder="Enter email" [(ngModel)]="model.email" required> -->
+        </div>
+        <div class="col-md-6 col-12 mb-3">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <app-text-input [formControl]='registerForm.controls["phoneNumber"]' 
+                          [label]='"Phone Number"'>
+          </app-text-input>
+          <!-- <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+            placeholder="Enter phone number" [(ngModel)]="model.phoneNumber" required> -->
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter last name"
-                    [(ngModel)]="model.lastName" required>
-            </div>
+      <!-- Birthdate & Gender -->
+      <div class="row">
+        <div class="col-md-6 col-12 mb-3">
+          <label for="birthDate" class="form-label">Birth Date</label>
+          <app-text-input [formControl]='registerForm.controls["birthDate"]' 
+                          [label]='"Birth Date"' [type]='"date"'>
+          </app-text-input>
+          <!-- <input type="date" id="birthDate" name="birthDate" class="form-control"
+            [(ngModel)]="model.birthDate" required> -->
+        </div>
+        <div class="col-md-6 col-12 mb-3">
+          <label for="gender" class="form-label">Gender</label>
+          <app-text-input [formControl]='registerForm.controls["gender"]' 
+                          [label]='"Gender"'>
+          </app-text-input>
+          <!-- <select id="gender" name="gender" class="form-control" [(ngModel)]="model.gender" required>
+            <option value="" disabled selected>Select gender</option>
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+            <option value="OTHER">Other</option>
+          </select> -->
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Enter email"
-                    [(ngModel)]="model.email" required>
-            </div>
+      <!-- Password & Confirm Password -->
+      <div class="row">
+        <div class="col-md-6 col-12 mb-3">
+          <label for="password" class="form-label">Password</label>
+          <app-text-input [formControl]='registerForm.controls["password"]' 
+                          [label]='"Password"' [type]='"password"'>
+          </app-text-input>
+          <!-- <input type="password" id="password" name="password" class="form-control"
+            placeholder="Enter password" [(ngModel)]="model.password" required> -->
+        </div>
+        <div class="col-md-6 col-12 mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
+                    [label]='"Confirm Password"' [type]='"password"'>
+          </app-text-input>
+          <!-- <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+            placeholder="Confirm password" [(ngModel)]="model.password" required> -->
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Phone Number</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
-                    placeholder="Enter phone number" [(ngModel)]="model.phoneNumber" required>
-            </div>
+      <div class="row" *ngIf="validationErrors.length > 0">
+        <ul class="text-danger">
+            <li *ngFor="let error of validationErrors">
+                {{error}}
+            </li>
+        </ul>
+      </div>
 
-            <div class="mb-3">
-                <label for="birthDate" class="form-label">Birth Date</label>
-                <input type="date" id="birthDate" name="birthDate" class="form-control" [(ngModel)]="model.birthDate"
-                    required>
-            </div>
+      <!-- Submit -->
+      <button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary w-100">Register</button>
 
-            <div class="mb-3">
-                <label for="gender" class="form-label">Gender</label>
-                <select id="gender" name="gender" class="form-control" [(ngModel)]="model.gender" required>
-                    <option value="" disabled selected>Select gender</option>
-                    <option value="MALE">Male</option>
-                    <option value="FEMALE">Female</option>
-                    <option value="OTHER">Other</option>
-                </select>
-            </div>
+      <p class="text-center mt-3 mb-0">
+        Already have an account? <a routerLink="/login">Login</a>
+      </p>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password"
-                    [(ngModel)]="model.password" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Register</button>
-
-            <p class="text-center mt-3 mb-0">
-                Already have an account? <a routerLink="/login">Login</a>
-            </p>
-
-        </form>
-    </div>
+    </form>
+  </div>
 </div>
