@@ -14,6 +14,7 @@ import { PublicFooterComponent } from './layouts/public-layout/public-footer/pub
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,18 @@ import { RegisterComponent } from './features/auth/register/register.component';
     BrowserModule,
     AppRoutingModule,           
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpClientModule, 
     FormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      timeOut: 3000,                        
+      progressBar: true,                    
+      closeButton: true,                    
+      easing: 'ease-in',                    
+      easeTime: 300,                        
+      toastClass: 'ngx-toastr animated fadeInDown'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

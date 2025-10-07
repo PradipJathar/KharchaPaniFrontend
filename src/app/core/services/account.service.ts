@@ -11,7 +11,7 @@ import { formatDate } from '@angular/common';
 })
 export class AccountService {
 
-  baseUrl = 'http://192.168.1.23:8091/api/';
+  baseUrl = 'http://192.168.1.33:8091/api/';
 
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
